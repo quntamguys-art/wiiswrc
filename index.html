@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WIIS | Smart Waste Management</title>
+
+    <!-- Fonts & Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+    <!-- Leaflet Map CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- App Styles -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+
+<body>
+
+    <!-- Toast Container (Auto-injected by Utils) -->
+
+    <!-- AUTH SCREEN -->
+    <div id="auth-section" class="auth-wrapper">
+        <div class="auth-box animate-fade">
+            <h1 class="brand flex-center" style="margin-bottom: 0.5rem;">
+                <ion-icon name="leaf"></ion-icon> WIIS
+            </h1>
+            <p class="text-muted mb-4">Waste to infrastructure integrated system</p>
+
+            <div class="flex-center" style="gap: 10px; margin-bottom: 2rem;">
+                <button onclick="auth.selectRole('citizen')" class="btn btn-secondary w-full"
+                    id="role-citizen">Citizen</button>
+                <button onclick="auth.selectRole('collector')" class="btn btn-white w-full"
+                    id="role-collector">Collector</button>
+                <button onclick="auth.selectRole('admin')" class="btn btn-white w-full" id="role-admin">Admin</button>
+            </div>
+
+            <form onsubmit="auth.login(event)">
+                <input type="text" id="username" class="form-input mb-4" placeholder="Enter Username..." required>
+                <input type="password" class="form-input mb-4" value="demo123" readonly>
+                <button type="submit" class="btn btn-primary w-full">Access Dashboard</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- DASHBOARD SCREEN -->
+    <div id="app-section" class="app-shell hidden">
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="brand">
+                <ion-icon name="leaf"></ion-icon> WIIS
+            </div>
+
+            <ul class="nav-menu" id="sidebar-nav">
+                <!-- Injected via JS -->
+            </ul>
+
+            <div class="nav-user">
+                <div class="flex-between">
+                    <div>
+                        <div id="nav-user-name" style="font-weight: 600;">User</div>
+                        <div id="nav-user-role" class="text-sm text-muted" style="text-transform: capitalize;">Role
+                        </div>
+                    </div>
+                    <button onclick="auth.logout()" class="btn btn-danger" style="padding: 0.5rem;">
+                        <ion-icon name="log-out-outline"></ion-icon>
+                    </button>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-area" id="main-view">
+            <!-- Dynamic Content -->
+        </main>
+
+        <!-- Mobile Nav -->
+        <nav class="mobile-nav" id="mobile-nav">
+            <!-- Injected via JS -->
+        </nav>
+
+    </div>
+
+    <!-- Libs -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
+    <!-- Core JS -->
+    <script src="js/utils.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/map.js"></script>
+    <script src="js/auth.js"></script>
+
+    <!-- Modules -->
+    <script src="js/citizen.js"></script>
+    <script src="js/collector.js"></script>
+    <script src="js/admin.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => auth.checkSession());
+    </script>
+</body>
+
+</html>
